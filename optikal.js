@@ -18,10 +18,18 @@ const puppeteer = require('puppeteer');
         console.log("new length is:"+guideTopic.length);
         
         const newTopic = await page.$x('//*[@id="bind-template1"]/a[23]/div/div');
-        console.log("new topic is:"+newTopic.length);
+        console.log("Ignore:"+newTopic.length);
 
         const dusraTopic = await page.$$('.result-grid-row');
         console.log("final length is:"+dusraTopic.length);
+
+        const openPages = await page.$$('#bind-template1');
+        console.log(openPages.length);
+
+        for (const section of openPages){
+            const button = await section.$('a.item');
+            button.click();
+        }
 
     }catch (e){
         console.log('our error',e);

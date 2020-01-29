@@ -12,7 +12,7 @@ async function scrapeProduct(url){
     const[el2] = await page.$x('//*[@id="bind-template1"]/a[1]/div/div');
     const txt = await el2.getProperty('textContent');
     const rawTxt = await txt.jsonValue();
-
+    
     // const[el2] = await page.$x('//*[@id="ContentSection_C017_Col00"]/div[4]');
     // const pageLinks = await el2.getProperty('href');
     // const rawTxt = await pageLinks.jsonValue();
