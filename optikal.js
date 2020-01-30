@@ -34,14 +34,27 @@ const puppeteer = require('puppeteer');
             const divs = await page.$$('.about-iams-content');
 
             if(divs){console.log("found all:"+divs);}
-
+            
+            const newdivs = await page.evaluate(()=> 
+                Array.from(document.querySelectorAll(".about-iams-content")).map(p => p.innerText.trim())
+            )
+            console.log("This is a new div"+newdivs);
             // loop over each P on the inner page
             for (const pp of divs){
                 // const pp = await divs[i].getProperty('textcontent');
                 // const value = await content.jsonValue();
-                // console.log(pp);
+                // const data1 = await (await pp.getProperty('value')).jsonValue();
+
+                // const linkProperty = await linkSelector.getProperty('href');
+                for(i=0; i<=pp.length; i++){
+                    console.log("pls tell me the length: " + pp.evaluate());
+
+                }
                 const name = await pp.$eval('p', p => p.innerText );
                 console.log('name:',name);
+ 
+                const href = await pp.jsonValue();
+                console.log("time keeps changing: "+href);
             }
 
         }
