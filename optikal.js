@@ -30,13 +30,18 @@ const puppeteer = require('puppeteer');
             const button = await section.$('a.item');
             button.click();
 
-            await page.waitForSelector('#ContentSection_C007_Col00');
-            const divs = await page.$$('ContentSection_C007_Col00 div');
+            await page.waitForSelector('.articles-wrapper');
+            const divs = await page.$$('.about-iams-content');
+
+            if(divs){console.log("found all:"+divs);}
 
             // loop over each P on the inner page
             for (const pp of divs){
-                const name = pp.$eval('p',p => p.innerText );
-                console.log('name',name);
+                // const pp = await divs[i].getProperty('textcontent');
+                // const value = await content.jsonValue();
+                // console.log(pp);
+                const name = await pp.$eval('p', p => p.innerText );
+                console.log('name:',name);
             }
 
         }
