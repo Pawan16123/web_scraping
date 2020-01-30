@@ -50,8 +50,13 @@ const puppeteer = require('puppeteer');
                     console.log("pls tell me the length: " + pp.evaluate());
 
                 }
-                const name = await pp.$eval('p', p => p.innerText );
-                console.log('name:',name);
+                const namees = await pp.evaluate(()=> 
+                Array.from(document.querySelectorAll("p.about-iams-subcontent")).map(p => p.innerText.trim())
+                )
+                console.log("nameees:  ", namees);
+
+                // const name = await pp.$eval('p[class="about-iams-subcontent"]', p => p.innerText.trim());
+                // console.log('name:',name);
  
                 const href = await pp.jsonValue();
                 console.log("time keeps changing: "+href);
