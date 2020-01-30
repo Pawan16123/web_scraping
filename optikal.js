@@ -29,6 +29,16 @@ const puppeteer = require('puppeteer');
         for (const section of openPages){
             const button = await section.$('a.item');
             button.click();
+
+            await page.waitForSelector('#ContentSection_C007_Col00');
+            const divs = await page.$$('ContentSection_C007_Col00 div');
+
+            // loop over each P on the inner page
+            for (const pp of divs){
+                const name = pp.$eval('p',p => p.innerText );
+                console.log('name',name);
+            }
+
         }
 
     }catch (e){
