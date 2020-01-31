@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs-extra');
 
 (async function main(){
     try{
@@ -25,6 +26,8 @@ const puppeteer = require('puppeteer');
 
         const openPages = await page.$$('#bind-template1');
         console.log(openPages.length);
+
+        await fs.writeFile('out.csv', 'section,name\n');
 
         for (const section of openPages){
             const button = await section.$('a.item');
@@ -60,9 +63,13 @@ const puppeteer = require('puppeteer');
  
                 const href = await pp.jsonValue();
                 console.log("time keeps changing: "+href);
+
+                await fs.appendFile('out.csv', `"${pp}","${namees}"\n`);
             }
 
         }
+        console.log("done");
+        await browser.close();
 
     }catch (e){
         console.log('our error',e);
