@@ -54,7 +54,7 @@ const fs = require('fs-extra');
 
                 }
                 const namees = await pp.evaluate(()=> 
-                Array.from(document.querySelectorAll("p.about-iams-subcontent")).map(p => p.innerText.trim())
+                Array.from(document.querySelectorAll("p.about-iams-subcontent")).map(p => p.innerText)
                 )
                 console.log("nameees:  ", namees);
 
@@ -64,7 +64,7 @@ const fs = require('fs-extra');
                 const href = await pp.jsonValue();
                 console.log("time keeps changing: "+href);
 
-                await fs.appendFile('out.csv', `"${pp}","${namees}"\n`);
+                await fs.appendFile('out2.csv', `"${pp}","${namees}"\n`);
             }
 
         }
