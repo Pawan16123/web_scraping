@@ -9,11 +9,11 @@ const fs = require('fs-extra');
 
         await page.goto('https://www.iams.com/pet-health/puppy-care');
         await page.waitForSelector(".loadmore-outer");
-        console.log("Turning up rocking");
+        console.log("Load more button found");
 
         const loadmoreBut = await page.$('.loadmore-outer');
         loadmoreBut.click();
-        console.log(loadmoreBut);
+        console.log("is this readable: "+loadmoreBut);
 
         const guideTopic = await page.$$('.result-grid-row');
         console.log("new length is:"+guideTopic.length);
